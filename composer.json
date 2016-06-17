@@ -1,0 +1,38 @@
+{
+    "name": "hellofresh/ausraster",
+    "type": "library",
+    "description": "A set of adapters for document manipulation.",
+    "keywords": [
+        "document",
+        "excel",
+        "spreadsheet",
+        "csv",
+        "office",
+        "xlsx"
+    ],
+    "homepage": "https://github.com/kieranajp/ausraster",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Kieran Patel",
+            "email": "kp@hellofresh.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "easyframework/collections": "^5.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^5.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "HelloFresh\\Ausraster\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    }
+}
