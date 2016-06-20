@@ -7,4 +7,6 @@ vendor/
 phpunit.xml
 build/
 
+# Working files
 test.php
+test.xlsx

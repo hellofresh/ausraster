@@ -1,9 +1,11 @@
 <?php
+declare(strict_types=1);
 
-namespace HelloFresh\Ausraster\Spreadsheet\PhpExcel;
+namespace HelloFresh\Ausraster\Spreadsheet\PHPExcel;
 
 use PHPExcel;
 use PHPExcel_IOFactory;
+use PHPExcel_Writer_Excel2007;
 use Collections\ArrayList;
 use Collections\VectorInterface;
 use HelloFresh\Ausraster\Spreadsheet\DocumentInterface;
@@ -11,12 +13,13 @@ use HelloFresh\Ausraster\Spreadsheet\WorksheetInterface;
 
 class Document implements DocumentInterface
 {
+    private $documentAdapter;
     private $worksheets;
 
     public function __construct()
     {
-        $this->document = new PHPExcel;
-        $this->document->removeSheetByIndex();
+        $this->documentAdapter = new PHPExcel;
+        $this->documentAdapter->removeSheetByIndex();
         $this->worksheets = new ArrayList;
     }
 
@@ -25,13 +28,21 @@ class Document implements DocumentInterface
      */
     public static function open(string $filepath) : DocumentInterface
     {
-        $this->document = PHPExcel_IOFactory::load($filepath);
-        $worksheets = new ArrayList($this->document->getSheetNames());
+        $this->documentAdapter = PHPExcel_IOFactory::load($filepath);
+        $worksheets = new ArrayList($this->documentAdapter->getSheetNames());
 
         $this->worksheets = $worksheets->map(function (string $sheetName) {
-            return new Worksheet($this->document->getSheetByName($sheetName));
+            return new Worksheet($this->documentAdapter->getSheetByName($sheetName));
         });
 
+        return $this;
+    }
+
+    public function save(string $filepath) : DocumentInterface
+    {
+        $writer = new PHPExcel_Writer_Excel2007($this->documentAdapter);
+        $writer->setPreCalculateFormulas(false);
+        $writer->save($filepath);
         return $this;
     }
 
@@ -48,8 +59,8 @@ class Document implements DocumentInterface
      */
     public function createWorksheet() : WorksheetInterface
     {
-        $worksheet = new Worksheet;
-        $this->worksheets->add(new Worksheet);
+        $worksheet = new Worksheet($this->documentAdapter->createSheet());
+        $this->worksheets->add($worksheet);
         return $worksheet;
     }
 }

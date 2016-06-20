@@ -1,14 +1,20 @@
 <?php
+declare(strict_types=1);
 
-namespace HelloFresh\Ausraster\Spreadsheet\PhpExcel;
+namespace HelloFresh\Ausraster\Spreadsheet\PHPExcel;
+
+use PHPExcel_Worksheet;
+use HelloFresh\Ausraster\Spreadsheet\Coordinate;
+use HelloFresh\Ausraster\Spreadsheet\CellInterface;
+use HelloFresh\Ausraster\Spreadsheet\WorksheetInterface;
 
 class Worksheet implements WorksheetInterface
 {
-    private $name;
+    private $adapterWorksheet;
 
-    public function __construct()
+    public function __construct(PHPExcel_Worksheet $adapterWorksheet)
     {
-        $this->name = (string) base_convert(microtime(), 10, 36);
+        $this->adapterWorksheet = $adapterWorksheet;
     }
 
     /**
@@ -16,7 +22,7 @@ class Worksheet implements WorksheetInterface
      */
     public function getName() : string
     {
-        return $this->name;
+        return $this->adapterWorksheet->getTitle();
     }
 
     /**
@@ -24,7 +30,7 @@ class Worksheet implements WorksheetInterface
      */
     public function changeName(string $name) : WorksheetInterface
     {
-        $this->name = $name;
+        $this->adapterWorksheet->setTitle($name);
         return $name;
     }
 
@@ -33,6 +39,6 @@ class Worksheet implements WorksheetInterface
      */
     public function getCellAt(Coordinate $coordinate) : CellInterface
     {
-
+        return new Cell($this->adapterWorksheet->getCell((string) $coordinate));
     }
 }
