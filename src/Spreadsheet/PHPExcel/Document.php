@@ -2,9 +2,12 @@
 
 namespace HelloFresh\Ausraster\Spreadsheet\PhpExcel;
 
+use PHPExcel;
+use PHPExcel_IOFactory;
 use Collections\ArrayList;
 use Collections\VectorInterface;
 use HelloFresh\Ausraster\Spreadsheet\DocumentInterface;
+use HelloFresh\Ausraster\Spreadsheet\WorksheetInterface;
 
 class Document implements DocumentInterface
 {
@@ -12,7 +15,7 @@ class Document implements DocumentInterface
 
     public function __construct()
     {
-        $this->document = new PhpExcel;
+        $this->document = new PHPExcel;
         $this->document->removeSheetByIndex();
         $this->worksheets = new ArrayList;
     }

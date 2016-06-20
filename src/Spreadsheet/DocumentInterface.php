@@ -11,7 +11,7 @@ interface DocumentInterface
      * @param string $filepath
      * @return DocumentInterface $this
      */
-    public static function open(string $filepath) : DocumentInterface
+    public static function open(string $filepath) : DocumentInterface;
 
     /**
      * Get all worksheets in the document.
