@@ -31,7 +31,7 @@ class Worksheet implements WorksheetInterface
     public function changeName(string $name) : WorksheetInterface
     {
         $this->adapterWorksheet->setTitle($name);
-        return $name;
+        return $this;
     }
 
     /**
