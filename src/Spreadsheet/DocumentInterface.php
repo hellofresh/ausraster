@@ -15,6 +15,13 @@ interface DocumentInterface
     public static function open(string $filepath) : DocumentInterface;
 
     /**
+     * Write the document to the filesystem
+     * @param  string $filepath
+     * @return DocumentInterface $this
+     */
+    public function save(string $filepath) : DocumentInterface;
+
+    /**
      * Get all worksheets in the document.
      * @return VectorInterface
      */
