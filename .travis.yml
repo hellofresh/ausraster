@@ -1,0 +1,18 @@
+language: php
+
+php:
+    - 7.0
+    - nightly
+
+matrix:
+    fast_finish: true
+
+install:
+    - composer self-update
+    - composer install --prefer-dist
+
+script:
+    - vendor/bin/phpunit --coverage-clover build/logs/clover.xml
+
+after_script:
+    - vendor/bin/codacycoverage clover build/logs/clover.xml
