@@ -10,8 +10,16 @@ use HelloFresh\Ausraster\Spreadsheet\WorksheetInterface;
 
 class Worksheet implements WorksheetInterface
 {
+    /**
+     * PHPExcel Worksheet Instance
+     * @var PHPExcel_Worksheet
+     */
     private $adapterWorksheet;
 
+    /**
+     * Create a new Worksheet.
+     * @param PHPExcel_Worksheet $adapterWorksheet
+     */
     public function __construct(PHPExcel_Worksheet $adapterWorksheet)
     {
         $this->adapterWorksheet = $adapterWorksheet;

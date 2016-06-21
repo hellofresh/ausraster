@@ -9,14 +9,17 @@ use HelloFresh\Ausraster\Spreadsheet\CellInterface;
 
 class Cell implements CellInterface
 {
+    /**
+     * Cell constructor.
+     * @param PHPExcel_Cell $adapterCell
+     */
     public function __construct(PHPExcel_Cell $adapterCell)
     {
         $this->adapterCell = $adapterCell;
     }
+
     /**
-     * Replace the cell's content with the provided string.
-     * @param string $content
-     * @return CellInterface
+     * {@inheritdoc}
      */
     public function fill(string $content) : CellInterface
     {
@@ -25,8 +28,7 @@ class Cell implements CellInterface
     }
 
     /**
-     * Get the cell's coordinates.
-     * @return Coordinate
+     * {@inheritdoc}
      */
     public function getCoordinate() : Coordinate
     {
@@ -34,8 +36,7 @@ class Cell implements CellInterface
     }
 
     /**
-     * Get the cell's content.
-     * @return string
+     * {@inheritdoc}
      */
     public function getContent() : string
     {
