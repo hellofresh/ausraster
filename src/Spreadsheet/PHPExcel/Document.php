@@ -13,9 +13,21 @@ use HelloFresh\Ausraster\Spreadsheet\WorksheetInterface;
 
 class Document implements DocumentInterface
 {
+    /**
+     * PHPExcel instance.
+     * @var PHPExcel
+     */
     private $documentAdapter;
+
+    /**
+     * Collection of worksheets in the document.
+     * @var ArrayList
+     */
     private $worksheets;
 
+    /**
+     * Create a new Document.
+     */
     public function __construct()
     {
         $this->documentAdapter = new PHPExcel;
@@ -28,22 +40,36 @@ class Document implements DocumentInterface
      */
     public static function open(string $filepath) : DocumentInterface
     {
-        $this->documentAdapter = PHPExcel_IOFactory::load($filepath);
+        $document = new static;
+        $document->documentAdapter = PHPExcel_IOFactory::load($filepath);
         $worksheets = new ArrayList($this->documentAdapter->getSheetNames());
 
-        $this->worksheets = $worksheets->map(function (string $sheetName) {
-            return new Worksheet($this->documentAdapter->getSheetByName($sheetName));
+        $document->worksheets = $worksheets->map(function (string $sheetName) {
+            return new Worksheet($document->documentAdapter->getSheetByName($sheetName));
         });
 
-        return $this;
+        return $document;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function save(string $filepath) : DocumentInterface
     {
         $writer = new PHPExcel_Writer_Excel2007($this->documentAdapter);
         $writer->setPreCalculateFormulas(false);
         $writer->save($filepath);
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function output() : string
+    {
+        ob_start();
+        $this->save('php://output');
+        return ob_get_clean();
     }
 
     /**
