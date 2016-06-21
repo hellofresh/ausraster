@@ -36,6 +36,6 @@
         }
     },
     "suggest": {
-        "phpoffice/phpexcel": "Required use the PHPExcel adapter"
+        "phpoffice/phpexcel": "Required to use the PHPExcel adapter"
     }
 }
