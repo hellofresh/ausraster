@@ -42,9 +42,9 @@ class Document implements DocumentInterface
     {
         $document = new static;
         $document->documentAdapter = PHPExcel_IOFactory::load($filepath);
-        $worksheets = new ArrayList($this->documentAdapter->getSheetNames());
+        $worksheets = new ArrayList($document->documentAdapter->getSheetNames());
 
-        $document->worksheets = $worksheets->map(function (string $sheetName) {
+        $document->worksheets = $worksheets->map(function (string $sheetName) use ($document) {
             return new Worksheet($document->documentAdapter->getSheetByName($sheetName));
         });
 
