@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-dark.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/print.css" media="print">
+
+    <title>Ausraster by hellofresh</title>
+  </head>
+
+  <body>
+
+    <header>
+      <div class="container">
+        <h1>Ausraster</h1>
+        <h2>Taking the (╯°□°）╯︵ ┻━┻ out of working with documents</h2>
+
+        <section id="downloads">
+          <a href="https://github.com/hellofresh/ausraster/zipball/master" class="btn">Download as .zip</a>
+          <a href="https://github.com/hellofresh/ausraster/tarball/master" class="btn">Download as .tar.gz</a>
+          <a href="https://github.com/hellofresh/ausraster" class="btn btn-github"><span class="icon"></span>View on GitHub</a>
+        </section>
+      </div>
+    </header>
+
+    <div class="container">
+      <section id="main_content">
+        <p align="center">
+  <a href="https://hellofresh.com">
+    <img width="120" src="https://www.hellofresh.de/images/hellofresh/press/HelloFresh_Logo.png">
+  </a>
+</p>
+
+<h1>
+<a id="ausraster" class="anchor" href="#ausraster" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Ausraster</h1>
+
+<p>Working with spreadsheets can make you (╯°□°）╯︵ ┻━┻. Ausraster puts a stop to that frustration, by providing a unified, sane interface over various document libraries.</p>
+
+<p align="center"><strong>┳━┳ ノ( ゜-゜ノ)</strong></p>
+
+<h2>
+<a id="features-and-roadmap" class="anchor" href="#features-and-roadmap" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Features and Roadmap</h2>
+
+<ul>
+<li>[x] Excel adapter (provided by <a href="https://github.com/PHPOffice/PHPExcel">PHPExcel</a>)</li>
+<li>[x] Fully PSR-2 compliant</li>
+<li>[x] Composer / PSR-4 compliant</li>
+<li>[ ] Test coverage</li>
+<li>[ ] Cell formatting</li>
+<li>[ ] CSV adapter</li>
+<li>[ ] Other adapters to come! Need an adapter? Feel free to <a href="Contributing.md">contribute</a>!</li>
+</ul>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installation</h3>
+
+<div class="highlight highlight-source-shell"><pre>$ composer require hellofresh/ausraster</pre></div>
+
+<h3>
+<a id="bring-your-own-adapter" class="anchor" href="#bring-your-own-adapter" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bring Your Own Adapter</h3>
+
+<p>By itself, Ausraster doesn't do much, as it needs another library to act as an interface to. For example, we can make use of Ausraster's Spreadsheet interfaces if we include <a href="https://github.com/PHPOffice/PHPExcel">PHPExcel</a>:</p>
+
+<div class="highlight highlight-source-shell"><pre>$ composer require phpoffice/phpexcel</pre></div>
+
+<p>No matter what spreadsheet adapter you use, Ausraster is designed to have the same simple, friendly interface.</p>
+
+<div class="highlight highlight-text-html-php"><pre><span class="pl-s1"><span class="pl-k">require_once</span> <span class="pl-s"><span class="pl-pds">'</span>vendor/autoload.php<span class="pl-pds">'</span></span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">HelloFresh\Ausraster\Spreadsheet\Coordinate</span>;</span>
+<span class="pl-s1"><span class="pl-k">use</span> <span class="pl-c1">HelloFresh\Ausraster\Spreadsheet\PhpExcel\Document</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$document</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Document</span>;</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$worksheet</span> <span class="pl-k">=</span> <span class="pl-smi">$document</span><span class="pl-k">-&gt;</span>createWorksheet();</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$coordinate</span> <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-c1">Coordinate</span>(<span class="pl-s"><span class="pl-pds">'</span>A<span class="pl-pds">'</span></span>, <span class="pl-c1">1</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$cell</span> <span class="pl-k">=</span> <span class="pl-smi">$worksheet</span><span class="pl-k">-&gt;</span>getCellAt(<span class="pl-smi">$coordinate</span>);</span>
+<span class="pl-s1"><span class="pl-smi">$cell</span><span class="pl-k">-&gt;</span>fill(<span class="pl-s"><span class="pl-pds">'</span>Ausraster rules!<span class="pl-pds">'</span></span>);</span>
+<span class="pl-s1"></span>
+<span class="pl-s1"><span class="pl-smi">$document</span><span class="pl-k">-&gt;</span>save(<span class="pl-s"><span class="pl-pds">'</span>example.xlsx<span class="pl-pds">'</span></span>);</span></pre></div>
+
+<p>To see more, check out the <a href="https://github.com/hellofresh/ausraster/tree/master/examples">examples folder</a>.</p>
+
+<h2>
+<a id="contributing" class="anchor" href="#contributing" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contributing</h2>
+
+<p>Thinking of adding an adapter or fixing a bug? Thanks! Please see <a href="CONTRIBUTING.md">CONTRIBUTING.md</a> before doing so to familiarise yourself with the review process, code of conduct, etc.</p>
+
+<h2>
+<a id="license" class="anchor" href="#license" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>License</h2>
+
+<p><a href="LICENSE">MIT License</a></p>
+      </section>
+    </div>
+
+    
+  </body>
+</html>
