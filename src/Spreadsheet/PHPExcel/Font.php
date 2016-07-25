@@ -8,40 +8,81 @@ use HelloFresh\Ausraster\FontInterface;
 
 class Font implements FontInterface
 {
-    private $adapterFont;
+    private $name = 'Calibri';
 
-    public function __construct(PHPExcel_Font $adapterFont)
-    {
-        $this->adapterFont = $adapterFont;
-    }
+    private $size = 12;
+
+    private $bold = false;
+
+    private $italic = false;
+
+    private $underline = false;
+
+    private $color = '000000';
 
     public function setName(string $name) : FontInterface
     {
-        $this->adapterFont->setName($name);
+        $this->name = $name;
         return $this;
+    }
+
+    public function getName() : string
+    {
+        return $this->name;
     }
 
     public function setSize(int $size) : FontInterface
     {
-        $this->adapterFont->setSize($size);
+        $this->size = $size;
         return $this;
+    }
+
+    public function getSize() : int
+    {
+        return $this->size;
     }
 
     public function setBold(bool $bold) : FontInterface
     {
-        $this->adapterFont->setBold($bold);
+        $this->bold = $bold;
         return $this;
+    }
+
+    public function getBold() : bool
+    {
+        return $this->bold;
     }
 
     public function setItalic(bool $italic) : FontInterface
     {
-        $this->adapterFont->setItalic($italic);
+        $this->italic = $italic;
         return $this;
+    }
+
+    public function getItalic() : bool
+    {
+        return $this->italic;
     }
 
     public function setUnderline(bool $underline) : FontInterface
     {
-        $this->adapterFont->setUnderline($underline);
+        $this->underline = $underline;
         return $this;
+    }
+
+    public function getUnderline() : bool
+    {
+        return $this->underline;
+    }
+
+    public function setColor(string $hex) : FontInterface
+    {
+        $this->color = str_replace('#', '', $hex);
+        return $this;
+    }
+
+    public function getColor() : string
+    {
+        return $this->color;
     }
 }

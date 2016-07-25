@@ -12,4 +12,6 @@ interface StyleInterface
     public function getFill() : string;
 
     public function setFont(FontInterface $font) : StyleInterface;
+
+    public function getFont() : FontInterface;
 }

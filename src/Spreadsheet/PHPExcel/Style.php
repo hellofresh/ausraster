@@ -9,7 +9,14 @@ use HelloFresh\Ausraster\Spreadsheet\StyleInterface;
 
 class Style implements StyleInterface
 {
-    private $fill;
+    private $fill = 'ffffff';
+
+    private $font;
+
+    public function __construct()
+    {
+        $this->font = new Font;
+    }
 
     public function setFill(string $hex) : StyleInterface
     {
@@ -24,6 +31,12 @@ class Style implements StyleInterface
 
     public function setFont(FontInterface $font) : StyleInterface
     {
+        $this->font = $font;
+        return $this;
+    }
 
+    public function getFont() : FontInterface
+    {
+        return $this->font;
     }
 }
