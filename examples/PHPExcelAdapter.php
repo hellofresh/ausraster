@@ -4,6 +4,8 @@ declare(strict_types=1);
 require_once 'vendor/autoload.php';
 
 use HelloFresh\Ausraster\Spreadsheet\Coordinate;
+use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Font;
+use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Style;
 use HelloFresh\Ausraster\Spreadsheet\PhpExcel\Document;
 
 // First we need to create a new Excel Document.
@@ -21,11 +23,24 @@ $coordinate = new Coordinate('A', 1);
 $cell = $worksheet->getCellAt($coordinate);
 $cell->fill('This is cell A1');
 
+// Change the cell's font
+$font = (new Font)->setName('Helvetica');
+$style = (new Style)->setFont($font);
+
+$cell->style($style);
+
+// Create a second worksheet
 $worksheet2 = $document->createWorksheet();
 $worksheet2->changeName('Testings');
 
 $cell = $worksheet2->getCellAt($coordinate);
 $cell->fill('A1 2');
+
+// Change the second cell's colours
+$font->setColor('#444444')->setBold(true);
+$style = (new Style)->setFont($font)->setFill('#efefef');
+
+$cell->style($style);
 
 // Save the document to the server's filesystem.
 $document->save('test.xlsx');
