@@ -13,6 +13,13 @@ interface CellInterface
     public function fill(string $content) : CellInterface;
 
     /**
+     * Replace the cell's style with the rules from the provided Style object.
+     * @param  StyleInterface $style
+     * @return CellInterface
+     */
+    public function style(StyleInterface $style) : CellInterface;
+
+    /**
      * Get the cell's coordinates.
      * @return Coordinate
      */
