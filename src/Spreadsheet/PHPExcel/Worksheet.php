@@ -49,4 +49,41 @@ class Worksheet implements WorksheetInterface
     {
         return new Cell($this->adapterWorksheet->getCell((string) $coordinate));
     }
+    
+    /**
+     * {@inheritdoc}
+     */
+    public function columnsAutoSizeByRange(string $from, string $to)
+    {
+        foreach (range($from, $to) as $columnID) {
+            $this->adapterWorksheet->getColumnDimension($columnID)
+                ->setAutoSize(true);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStyleAt(Coordinate $coordinate) : StyleInterface
+    {
+        return $this->styleAt((string) $coordinate);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getStyleAtRange(CoordinateRange $range) : StyleInterface
+    {
+        return $this->styleAt((string) $range);
+    }
+
+    /**
+     * @param string $value
+     *
+     * @return StyleInterface
+     */
+    private function styleAt(string $value) : StyleInterface
+    {
+        return new Style($this->adapterWorksheet->getStyle($value));
+    }
 }
