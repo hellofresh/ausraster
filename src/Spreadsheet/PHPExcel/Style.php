@@ -2,8 +2,9 @@
 
 namespace HelloFresh\Ausraster\Spreadsheet\PHPExcel;
 
-use PHPExcel_Font;
 use HelloFresh\Ausraster\FontInterface;
+use HelloFresh\Ausraster\ColorInterface;
+use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Color;
 use HelloFresh\Ausraster\Spreadsheet\StyleInterface;
 
 class Style implements StyleInterface
@@ -12,7 +13,7 @@ class Style implements StyleInterface
      * Cell fill color.
      * @var string
      */
-    private $fill = 'ffffff';
+    private $fill;
 
     /**
      * Cell font instance.
@@ -23,21 +24,22 @@ class Style implements StyleInterface
     public function __construct()
     {
         $this->font = new Font;
+        $this->fill = new Color('#ffffff');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setFill(string $hex) : StyleInterface
+    public function setFill(ColorInterface $color) : StyleInterface
     {
-        $this->fill = str_replace('#', '', $hex);
+        $this->fill = $color;
         return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getFill() : string
+    public function getFill() : ColorInterface
     {
         return $this->fill;
     }

@@ -38,14 +38,14 @@ class Cell implements CellInterface
         $adapterStyle = $this->adapterCell->getStyle()->applyFromArray([
             'fill' => [
                 'type'      => PHPExcel_Style_Fill::FILL_SOLID,
-                'color'     => [ 'rgb' => $style->getFill() ],
+                'color'     => [ 'rgb' => (string) $style->getFill() ],
             ],
             'font' => [
                 'name'      => $style->getFont()->getName(),
                 'bold'      => $style->getFont()->getBold(),
                 'italic'    => $style->getFont()->getItalic(),
                 'underline' => $style->getFont()->getUnderline(),
-                'color'     => [ 'rgb' => $style->getFont()->getColor() ],
+                'color'     => [ 'rgb' => (string) $style->getFont()->getColor() ],
             ],
         ]);
 

@@ -2,8 +2,8 @@
 
 namespace HelloFresh\Ausraster\Spreadsheet\PHPExcel;
 
-use PHPExcel_Font;
 use HelloFresh\Ausraster\FontInterface;
+use HelloFresh\Ausraster\ColorInterface;
 
 class Font implements FontInterface
 {
@@ -39,9 +39,9 @@ class Font implements FontInterface
 
     /**
      * Font color.
-     * @var string
+     * @var ColorInterface
      */
-    private $color = '000000';
+    private $color;
 
     /**
      * {@inheritdoc}
@@ -49,6 +49,7 @@ class Font implements FontInterface
     public function setName(string $name) : FontInterface
     {
         $this->name = $name;
+        $this->color = new Color('#000000');
         return $this;
     }
 
@@ -131,16 +132,16 @@ class Font implements FontInterface
     /**
      * {@inheritdoc}
      */
-    public function setColor(string $hex) : FontInterface
+    public function setColor(ColorInterface $color) : FontInterface
     {
-        $this->color = str_replace('#', '', $hex);
+        $this->color = $color;
         return $this;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getColor() : string
+    public function getColor() : ColorInterface
     {
         return $this->color;
     }

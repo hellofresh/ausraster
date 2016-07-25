@@ -3,22 +3,23 @@
 namespace HelloFresh\Ausraster\Spreadsheet;
 
 use HelloFresh\Ausraster\FontInterface;
+use HelloFresh\Ausraster\ColorInterface;
 
 interface StyleInterface
 {
     /**
      * Set the background fill.
-     * @param string $hex
+     * @param ColorInterface $color
      * @TODO Replace with Color object
      */
-    public function setFill(string $hex) : StyleInterface;
+    public function setFill(ColorInterface $color) : StyleInterface;
 
     /**
      * Get the background fill.
-     * @return string
+     * @return ColorInterface
      * @TODO Replace with Color object
      */
-    public function getFill() : string;
+    public function getFill() : ColorInterface;
 
     /**
      * Set the font.

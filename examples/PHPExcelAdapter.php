@@ -4,6 +4,7 @@ require_once 'vendor/autoload.php';
 
 use HelloFresh\Ausraster\Spreadsheet\Coordinate;
 use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Font;
+use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Color;
 use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Style;
 use HelloFresh\Ausraster\Spreadsheet\PhpExcel\Document;
 
@@ -36,8 +37,8 @@ $cell = $worksheet2->getCellAt($coordinate);
 $cell->fill('A1 2');
 
 // Change the second cell's colours
-$font->setColor('#444444')->setBold(true);
-$style = (new Style)->setFont($font)->setFill('#efefef');
+$font->setColor(new Color('#444444'))->setBold(true);
+$style = (new Style)->setFont($font)->setFill(new Color('#efefef'));
 
 $cell->style($style);
 
