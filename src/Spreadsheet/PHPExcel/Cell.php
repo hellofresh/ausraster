@@ -42,9 +42,9 @@ class Cell implements CellInterface
             ],
             'font' => [
                 'name'      => $style->getFont()->getName(),
-                'bold'      => $style->getFont()->getBold(),
-                'italic'    => $style->getFont()->getItalic(),
-                'underline' => $style->getFont()->getUnderline(),
+                'bold'      => $style->getFont()->isBold(),
+                'italic'    => $style->getFont()->isItalic(),
+                'underline' => $style->getFont()->isUnderlined(),
                 'color'     => [ 'argb' => (string) $style->getFont()->getColor() ],
             ],
         ]);

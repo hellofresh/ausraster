@@ -1,16 +1,16 @@
 <?php declare(strict_types=1);
 
-require_once 'vendor/autoload.php';
-
+use HelloFresh\Ausraster\Font;
+use HelloFresh\Ausraster\Color;
+use HelloFresh\Ausraster\Spreadsheet\Style;
 use HelloFresh\Ausraster\Spreadsheet\Coordinate;
-use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Font;
-use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Color;
-use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Style;
-use HelloFresh\Ausraster\Spreadsheet\PhpExcel\Document;
+use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Document;
+
+require_once 'vendor/autoload.php';
 
 // First we need to create a new Excel Document.
 // Can also use Document::open('filename.xlsx') to open an existing document.
-$document = new Document;
+$document = new Document();
 
 // A Document has no Worksheets by default, so we need to add one. Its name is auto-generated.
 $worksheet = $document->createWorksheet();
@@ -24,8 +24,8 @@ $cell = $worksheet->getCellAt($coordinate);
 $cell->fill('This is cell A1');
 
 // Change the cell's font
-$font = (new Font)->setName('Helvetica');
-$style = (new Style)->setFont($font);
+$font = (new Font())->setName('Helvetica');
+$style = (new Style())->setFont($font);
 
 $cell->style($style);
 $cell->resizeWidth();
@@ -39,7 +39,7 @@ $cell->fill('A1 2');
 
 // Change the second cell's colours
 $font->setColor(new Color('#444444'))->setBold(true);
-$style = (new Style)->setFont($font)->setFill(new Color('#efefef'));
+$style = (new Style())->setFont($font)->setFill(new Color('#efefef'));
 
 $cell->style($style);
 $cell->resizeHeight(100);

@@ -1,9 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HelloFresh\Ausraster\Spreadsheet\PHPExcel;
-
-use HelloFresh\Ausraster\FontInterface;
-use HelloFresh\Ausraster\ColorInterface;
+namespace HelloFresh\Ausraster;
 
 class Font implements FontInterface
 {
@@ -43,13 +40,17 @@ class Font implements FontInterface
      */
     private $color;
 
+    public function __construct()
+    {
+        $this->color = new Color(Color::BLACK);
+    }
+
     /**
      * {@inheritdoc}
      */
     public function setName(string $name) : FontInterface
     {
         $this->name = $name;
-        $this->color = new Color(Color::BLACK);
         return $this;
     }
 
@@ -90,7 +91,7 @@ class Font implements FontInterface
     /**
      * {@inheritdoc}
      */
-    public function getBold() : bool
+    public function isBold() : bool
     {
         return $this->bold;
     }
@@ -107,7 +108,7 @@ class Font implements FontInterface
     /**
      * {@inheritdoc}
      */
-    public function getItalic() : bool
+    public function isItalic() : bool
     {
         return $this->italic;
     }
@@ -124,7 +125,7 @@ class Font implements FontInterface
     /**
      * {@inheritdoc}
      */
-    public function getUnderline() : bool
+    public function isUnderlined() : bool
     {
         return $this->underline;
     }

@@ -39,7 +39,7 @@ final class Coordinate
         $coords = preg_split('/(?=\d)/', $coordinate, 2);
 
         if (! isset($coords[1])) {
-            throw new InvalidCoordinateException;
+            throw new InvalidCoordinateException();
         }
 
         return new Coordinate($coords[0], (int) $coords[1]);
@@ -78,21 +78,21 @@ final class Coordinate
             $this->validateX($x);
             $this->validateY($y);
         } catch (\Error $e) {
-            throw new InvalidCoordinateException;
+            throw new InvalidCoordinateException();
         }
     }
 
     private function validateX(string $x)
     {
         if (! ctype_alpha($x)) {
-            throw new InvalidCoordinateException;
+            throw new InvalidCoordinateException();
         }
     }
 
     private function validateY(int $y)
     {
         if (! filter_var($y, FILTER_VALIDATE_INT) || $y < 1) {
-            throw new InvalidCoordinateException;
+            throw new InvalidCoordinateException();
         }
     }
 }

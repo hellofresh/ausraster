@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 
-namespace HelloFresh\Ausraster\Spreadsheet\PHPExcel;
+namespace HelloFresh\Ausraster;
 
 use PHPExcel_Font;
 use HelloFresh\Ausraster\ColorInterface;
@@ -29,7 +29,7 @@ final class Color implements ColorInterface
     public function __construct(string $hex, int $opacity = self::MAX_OPACITY)
     {
         if (! preg_match('/#?([a-f0-9]{6})/i', $hex) || $opacity < self::MIN_OPACITY || $opacity > self::MAX_OPACITY) {
-            throw new InvalidColorException;
+            throw new InvalidColorException();
         }
 
         $this->hex = str_replace('#', '', $hex);
@@ -50,7 +50,7 @@ final class Color implements ColorInterface
     public function changeOpacity(int $opacity) : ColorInterface
     {
         if ($opacity < self::MIN_OPACITY || $opacity > self::MAX_OPACITY) {
-            throw new InvalidColorException;
+            throw new InvalidColorException();
         }
 
         $this->opacity = $opacity;

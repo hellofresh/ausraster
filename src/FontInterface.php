@@ -55,18 +55,17 @@ interface FontInterface
      * Get whether the font is bolded.
      * @return bool
      */
-    public function getBold() : bool;
+    public function isBold() : bool;
 
     /**
      * Get whether the font is italicized.
      * @return bool
      */
-    public function getItalic() : bool;
+    public function isItalic() : bool;
 
     /**
      * Get whether the font is underlined.
      * @return bool
      */
-    public function getUnderline() : bool;
-
+    public function isUnderlined() : bool;
 }

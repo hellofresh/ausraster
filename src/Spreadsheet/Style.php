@@ -2,6 +2,7 @@
 
 namespace HelloFresh\Ausraster\Spreadsheet;
 
+use HelloFresh\Ausraster\Font;
 use HelloFresh\Ausraster\FontInterface;
 use HelloFresh\Ausraster\ColorInterface;
 use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Color;
@@ -22,7 +23,7 @@ class Style implements StyleInterface
 
     public function __construct()
     {
-        $this->font = new Font;
+        $this->font = new Font();
     }
 
     /**
