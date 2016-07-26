@@ -24,13 +24,12 @@ class Style implements StyleInterface
     public function __construct()
     {
         $this->font = new Font;
-        $this->fill = new Color('#ffffff');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setFill(ColorInterface $color) : StyleInterface
+    public function setFill(ColorInterface $color = null) : StyleInterface
     {
         $this->fill = $color;
         return $this;
@@ -39,7 +38,7 @@ class Style implements StyleInterface
     /**
      * {@inheritdoc}
      */
-    public function getFill() : ColorInterface
+    public function getFill()
     {
         return $this->fill;
     }

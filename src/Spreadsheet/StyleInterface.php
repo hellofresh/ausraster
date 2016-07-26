@@ -9,17 +9,15 @@ interface StyleInterface
 {
     /**
      * Set the background fill.
-     * @param ColorInterface $color
-     * @TODO Replace with Color object
+     * @param ColorInterface|null $color
      */
-    public function setFill(ColorInterface $color) : StyleInterface;
+    public function setFill(ColorInterface $color = null) : StyleInterface;
 
     /**
      * Get the background fill.
-     * @return ColorInterface
-     * @TODO Replace with Color object
+     * @return ColorInterface|null
      */
-    public function getFill() : ColorInterface;
+    public function getFill();
 
     /**
      * Set the font.

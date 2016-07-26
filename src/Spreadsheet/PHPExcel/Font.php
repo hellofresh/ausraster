@@ -49,7 +49,7 @@ class Font implements FontInterface
     public function setName(string $name) : FontInterface
     {
         $this->name = $name;
-        $this->color = new Color('#000000');
+        $this->color = new Color(Color::BLACK);
         return $this;
     }
 

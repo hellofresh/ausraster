@@ -37,15 +37,15 @@ class Cell implements CellInterface
     {
         $adapterStyle = $this->adapterCell->getStyle()->applyFromArray([
             'fill' => [
-                'type'      => PHPExcel_Style_Fill::FILL_SOLID,
-                'color'     => [ 'rgb' => (string) $style->getFill() ],
+                'type'      => $style->getFill() ? PHPExcel_Style_Fill::FILL_SOLID : PHPExcel_Style_Fill::FILL_NONE,
+                'color'     => [ 'argb' => $style->getFill() ?: '00ffffff' ],
             ],
             'font' => [
                 'name'      => $style->getFont()->getName(),
                 'bold'      => $style->getFont()->getBold(),
                 'italic'    => $style->getFont()->getItalic(),
                 'underline' => $style->getFont()->getUnderline(),
-                'color'     => [ 'rgb' => (string) $style->getFont()->getColor() ],
+                'color'     => [ 'argb' => (string) $style->getFont()->getColor() ],
             ],
         ]);
 
