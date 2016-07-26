@@ -57,7 +57,7 @@ class Cell implements CellInterface
      */
     public function getCoordinate() : Coordinate
     {
-        $coordinates = Coordinate::fromString($this->adapterCell->getCoordinate());
+        return Coordinate::fromString($this->adapterCell->getCoordinate());
     }
 
     /**
@@ -66,5 +66,36 @@ class Cell implements CellInterface
     public function getContent() : string
     {
         return $this->adapterCell->getValue();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function resizeWidth(int $width = null) : CellInterface
+    {
+        $column = $this->adapterCell->getWorksheet()->getColumnDimension('A');
+
+        if ($width === null) {
+            $column->setAutoSize(true);
+            return $this;
+        }
+
+        $column->setWidth($width);
+        return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function resizeHeight(int $height = null) : CellInterface
+    {
+        $row = $this->adapterCell->getWorksheet()->getRowDimension($this->getCoordinate()->y());
+
+        // if ($height === null) {
+            $height = -1;
+        // }
+
+        $row->setRowHeight($height);
+        return $this;
     }
 }

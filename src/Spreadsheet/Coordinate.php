@@ -4,7 +4,7 @@ namespace HelloFresh\Ausraster\Spreadsheet;
 
 use HelloFresh\Ausraster\Exception\InvalidCoordinateException;
 
-class Coordinate
+final class Coordinate
 {
     /**
      * @var string
@@ -29,6 +29,11 @@ class Coordinate
         $this->y = $y;
     }
 
+    /**
+     * Named constructor to build a Coordinate from a string
+     * @param  string $coordinate e.g. A1
+     * @return Coordinate
+     */
     public static function fromString(string $coordinate) : Coordinate
     {
         $coords = preg_split('/(?=\d)/', $coordinate, 2);

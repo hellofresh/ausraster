@@ -28,6 +28,7 @@ $font = (new Font)->setName('Helvetica');
 $style = (new Style)->setFont($font);
 
 $cell->style($style);
+$cell->resizeWidth();
 
 // Create a second worksheet
 $worksheet2 = $document->createWorksheet();
@@ -41,6 +42,7 @@ $font->setColor(new Color('#444444'))->setBold(true);
 $style = (new Style)->setFont($font)->setFill(new Color('#efefef'));
 
 $cell->style($style);
+$cell->resizeHeight(100);
 
 // Save the document to the server's filesystem.
 $document->save('test.xlsx');

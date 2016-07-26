@@ -29,4 +29,20 @@ interface CellInterface
      * @return string
      */
     public function getContent() : string;
+
+    /**
+     * Resize the width of the cell.
+     * @param int|null $width - null sets the width to autoresize.
+     * @return CellInterface
+     * @deprecated because this is a hack until next major version gets Row and Column objects
+     */
+    public function resizeWidth(int $width = null) : CellInterface;
+
+    /**
+     * Resize the height of the cell.
+     * @param int|null $width - null sets the height back to default
+     * @return CellInterface
+     * @deprecated because this is a hack until next major version gets Row and Column objects
+     */
+    public function resizeHeight(int $height = null) : CellInterface;
 }
