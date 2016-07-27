@@ -16,7 +16,7 @@ Working with spreadsheets can make you (╯°□°）╯︵ ┻━┻. Ausraster
 - [x] Fully PSR-2 compliant
 - [x] Composer / PSR-4 compliant
 - [ ] Test coverage
-- [ ] Cell formatting
+- [x] Cell formatting
 - [ ] CSV adapter
 - [ ] Other adapters to come! Need an adapter? Feel free to [contribute](Contributing.md)!
 

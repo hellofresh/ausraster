@@ -9,14 +9,34 @@ use HelloFresh\Ausraster\Exception\InvalidCellRangeException;
 
 class CoordinateRange implements Iterator
 {
+    /**
+     * Start of range.
+     * @var Coordinate
+     */
     private $from;
 
+    /**
+     * End of range.
+     * @var Coordinate
+     */
     private $to;
 
+    /**
+     * Current X coordinate pointer.
+     * @var string
+     */
     private $pointerX;
 
+    /**
+     * Current Y coordinate pointer
+     * @var int
+     */
     private $pointerY;
 
+    /**
+     * Counter (used as key)
+     * @var int
+     */
     private $counter = 0;
 
     public function __construct(Coordinate $from, Coordinate $to)
@@ -31,11 +51,18 @@ class CoordinateRange implements Iterator
         $this->rewind();
     }
 
+    /**
+     * Return the counter.
+     * @return int
+     */
     public function key() : int
     {
         return $counter;
     }
 
+    /**
+     * Advance the iterator to the next item.
+     */
     public function next()
     {
         ++$this->counter;
@@ -45,6 +72,9 @@ class CoordinateRange implements Iterator
         }
     }
 
+    /**
+     * Reset the iterator to the start.
+     */
     public function rewind()
     {
         $this->counter = 0;
@@ -52,11 +82,19 @@ class CoordinateRange implements Iterator
         $this->pointerY = $this->from->y();
     }
 
+    /**
+     * Check if the iterator should be ended.
+     * @return bool
+     */
     public function valid() : bool
     {
         return ! ($this->pointerX > $this->to->x());
     }
 
+    /**
+     * Get the current item being iterated over.
+     * @return Coordinate
+     */
     public function current() : Coordinate
     {
         return new Coordinate($this->pointerX, $this->pointerY);
