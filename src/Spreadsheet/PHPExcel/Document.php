@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace HelloFresh\Ausraster\Spreadsheet\PHPExcel;
 
@@ -30,9 +29,9 @@ class Document implements DocumentInterface
      */
     public function __construct()
     {
-        $this->documentAdapter = new PHPExcel;
+        $this->documentAdapter = new PHPExcel();
         $this->documentAdapter->removeSheetByIndex();
-        $this->worksheets = new ArrayList;
+        $this->worksheets = new ArrayList();
     }
 
     /**
@@ -40,7 +39,7 @@ class Document implements DocumentInterface
      */
     public static function open(string $filepath) : DocumentInterface
     {
-        $document = new static;
+        $document = new static();
         $document->documentAdapter = PHPExcel_IOFactory::load($filepath);
         $worksheets = new ArrayList($document->documentAdapter->getSheetNames());
 

@@ -1,11 +1,10 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 namespace HelloFresh\Ausraster\Spreadsheet;
 
 use HelloFresh\Ausraster\Exception\InvalidCoordinateException;
 
-class Coordinate
+final class Coordinate
 {
     /**
      * @var string
@@ -30,12 +29,17 @@ class Coordinate
         $this->y = $y;
     }
 
+    /**
+     * Named constructor to build a Coordinate from a string
+     * @param  string $coordinate e.g. A1
+     * @return Coordinate
+     */
     public static function fromString(string $coordinate) : Coordinate
     {
         $coords = preg_split('/(?=\d)/', $coordinate, 2);
 
         if (! isset($coords[1])) {
-            throw new InvalidCoordinateException;
+            throw new InvalidCoordinateException();
         }
 
         return new Coordinate($coords[0], (int) $coords[1]);
@@ -68,27 +72,45 @@ class Coordinate
         return $this->y;
     }
 
+    /**
+     * Compare a provided coordinate against this one.
+     * @param  Coordinate $comparison
+     * @return int      Uses standard <=> style return values.
+     */
+    public function compareTo(Coordinate $comparison) : int
+    {
+        if ($comparison->x() < $this->x() || $comparison->y() < $this->y()) {
+            return -1;
+        }
+
+        if ($comparison->x() > $this->x() || $comparison->y() > $this->y()) {
+            return 1;
+        }
+
+        return 0;
+    }
+
     private function validateCoordinates($x, $y)
     {
         try {
             $this->validateX($x);
             $this->validateY($y);
         } catch (\Error $e) {
-            throw new InvalidCoordinateException;
+            throw new InvalidCoordinateException();
         }
     }
 
     private function validateX(string $x)
     {
-        if (! ctype_alpha($x)) {
-            throw new InvalidCoordinateException;
+        if (! ctype_alpha($x) && strlen($x) !== 1) {
+            throw new InvalidCoordinateException();
         }
     }
 
     private function validateY(int $y)
     {
         if (! filter_var($y, FILTER_VALIDATE_INT) || $y < 1) {
-            throw new InvalidCoordinateException;
+            throw new InvalidCoordinateException();
         }
     }
 }

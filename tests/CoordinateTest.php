@@ -1,5 +1,4 @@
-<?php
-declare(strict_types=1);
+<?php declare(strict_types=1);
 
 use HelloFresh\Ausraster\Spreadsheet\Coordinate;
 
@@ -54,7 +53,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
      */
     public function testCreatingInvalidCoordinateFromString($x, $y)
     {
-        $coordinate = Coordinate::fromString($x . $y);
+        Coordinate::fromString($x . $y);
     }
 
     public function validProvider()
@@ -63,7 +62,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
             [ 'A', 1 ],
             [ 'a', 1 ],
             [ 'C', 10 ],
-            [ 'JJ', 999 ]
+            // [ 'JJ', 999 ]
         ];
     }
 
