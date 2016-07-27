@@ -72,6 +72,24 @@ final class Coordinate
         return $this->y;
     }
 
+    /**
+     * Compare a provided coordinate against this one.
+     * @param  Coordinate $comparison
+     * @return int      Uses standard <=> style return values.
+     */
+    public function compareTo(Coordinate $comparison) : int
+    {
+        if ($comparison->x() < $this->x() || $comparison->y() < $this->y()) {
+            return -1;
+        }
+
+        if ($comparison->x() > $this->x() || $comparison->y() > $this->y()) {
+            return 1;
+        }
+
+        return 0;
+    }
+
     private function validateCoordinates($x, $y)
     {
         try {

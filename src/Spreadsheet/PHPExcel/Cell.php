@@ -91,9 +91,9 @@ class Cell implements CellInterface
     {
         $row = $this->adapterCell->getWorksheet()->getRowDimension($this->getCoordinate()->y());
 
-        // if ($height === null) {
+        if ($height === null) {
             $height = -1;
-        // }
+        }
 
         $row->setRowHeight($height);
         return $this;

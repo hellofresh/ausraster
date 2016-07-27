@@ -3,6 +3,7 @@
 use HelloFresh\Ausraster\Font;
 use HelloFresh\Ausraster\Color;
 use HelloFresh\Ausraster\Spreadsheet\Style;
+use HelloFresh\Ausraster\Spreadsheet\CellRange;
 use HelloFresh\Ausraster\Spreadsheet\Coordinate;
 use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Document;
 
@@ -36,13 +37,18 @@ $worksheet2->changeName('Testings');
 
 $cell = $worksheet2->getCellAt($coordinate);
 $cell->fill('A1 2');
+$cell->resizeHeight(100);
 
-// Change the second cell's colours
-$font->setColor(new Color('#444444'))->setBold(true);
+// We can style a range of cells, too.
+$font->setColor(new Color('#555555'))->setBold(true);
 $style = (new Style())->setFont($font)->setFill(new Color('#efefef'));
 
-$cell->style($style);
-$cell->resizeHeight(100);
+$cellRange = new CellRange($worksheet2, new Coordinate('A', 1), new Coordinate('B', 4));
+
+// CellRange is an iterator, so we can loop over the cells now and style each.
+foreach ($cellRange as $cell) {
+    $cell->style($style);
+}
 
 // Save the document to the server's filesystem.
 $document->save('test.xlsx');
