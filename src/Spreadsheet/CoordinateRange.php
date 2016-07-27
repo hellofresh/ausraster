@@ -5,13 +5,10 @@ namespace HelloFresh\Ausraster\Spreadsheet;
 use \Iterator;
 use HelloFresh\Ausraster\Spreadsheet\Coordinate;
 use HelloFresh\Ausraster\Spreadsheet\CellInterface;
-use HelloFresh\Ausraster\Spreadsheet\WorksheetInterface;
 use HelloFresh\Ausraster\Exception\InvalidCellRangeException;
 
-class CellRange implements Iterator
+class CoordinateRange implements Iterator
 {
-    private $worksheet;
-
     private $from;
 
     private $to;
@@ -20,13 +17,13 @@ class CellRange implements Iterator
 
     private $pointerY;
 
-    public function __construct(WorksheetInterface $worksheet, Coordinate $from, Coordinate $to)
+    private $counter = 0;
+
+    public function __construct(Coordinate $from, Coordinate $to)
     {
         if ($from->compareTo($to) !== 1) {
             throw new InvalidCellRangeException();
         }
-
-        $this->worksheet = $worksheet;
 
         $this->from = $from;
         $this->to = $to;
@@ -34,13 +31,14 @@ class CellRange implements Iterator
         $this->rewind();
     }
 
-    public function key()
+    public function key() : int
     {
-        return new Coordinate($this->pointerX, $this->pointerY);
+        return $counter;
     }
 
     public function next()
     {
+        ++$this->counter;
         if (++$this->pointerY > $this->to->y()) {
             $this->pointerY = $this->from->y();
             ++$this->pointerX;
@@ -49,17 +47,18 @@ class CellRange implements Iterator
 
     public function rewind()
     {
+        $this->counter = 0;
         $this->pointerX = $this->from->x();
         $this->pointerY = $this->from->y();
     }
 
-    public function valid()
+    public function valid() : bool
     {
         return ! ($this->pointerX > $this->to->x());
     }
 
-    public function current() : CellInterface
+    public function current() : Coordinate
     {
-        return $this->worksheet->getCellAt(new Coordinate($this->pointerX, $this->pointerY));
+        return new Coordinate($this->pointerX, $this->pointerY);
     }
 }

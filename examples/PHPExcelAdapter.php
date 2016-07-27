@@ -3,7 +3,7 @@
 use HelloFresh\Ausraster\Font;
 use HelloFresh\Ausraster\Color;
 use HelloFresh\Ausraster\Spreadsheet\Style;
-use HelloFresh\Ausraster\Spreadsheet\CellRange;
+use HelloFresh\Ausraster\Spreadsheet\CoordinateRange;
 use HelloFresh\Ausraster\Spreadsheet\Coordinate;
 use HelloFresh\Ausraster\Spreadsheet\PHPExcel\Document;
 
@@ -43,11 +43,11 @@ $cell->resizeHeight(100);
 $font->setColor(new Color('#555555'))->setBold(true);
 $style = (new Style())->setFont($font)->setFill(new Color('#efefef'));
 
-$cellRange = new CellRange($worksheet2, new Coordinate('A', 1), new Coordinate('B', 4));
+$coordinateRange = new CoordinateRange(new Coordinate('A', 1), new Coordinate('B', 4));
 
 // CellRange is an iterator, so we can loop over the cells now and style each.
-foreach ($cellRange as $cell) {
-    $cell->style($style);
+foreach ($coordinateRange as $coordinate) {
+    $worksheet2->getCellAt($coordinate)->style($style);
 }
 
 // Save the document to the server's filesystem.
