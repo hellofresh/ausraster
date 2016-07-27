@@ -73,7 +73,7 @@ class Cell implements CellInterface
      */
     public function resizeWidth(int $width = null) : CellInterface
     {
-        $column = $this->adapterCell->getWorksheet()->getColumnDimension('A');
+        $column = $this->adapterCell->getWorksheet()->getColumnDimension($this->getCoordinate()->x());
 
         if ($width === null) {
             $column->setAutoSize(true);
