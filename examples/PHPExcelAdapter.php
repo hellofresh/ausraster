@@ -40,7 +40,7 @@ $cell->fill('A1 2');
 $cell->resizeHeight(100);
 
 // We can style a range of cells, too.
-$font->setColor(new Color('#555555'))->setBold(true);
+$font->setColor(new Color('#555555'))->setBold(true)->setSize(16);
 $style = (new Style())->setFont($font)->setFill(new Color('#efefef'));
 
 $coordinateRange = new CoordinateRange(new Coordinate('A', 1), new Coordinate('B', 4));
