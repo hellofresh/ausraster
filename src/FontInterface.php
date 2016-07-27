@@ -12,38 +12,17 @@ interface FontInterface
     public function setName(string $name) : FontInterface;
 
     /**
+     * Get the typeface name.
+     * @return string
+     */
+    public function getName() : string;
+
+    /**
      * Set the font size.
      * @param int $size
      * @return FontInterface
      */
     public function setSize(int $size) : FontInterface;
-
-    /**
-     * Set whether the font should be displayed in bold.
-     * @param bool $bold
-     * @return FontInterface
-     */
-    public function setBold(bool $bold) : FontInterface;
-
-    /**
-     * Set whether the font should be displayed italicized.
-     * @param bool $italic
-     * @return FontInterface
-     */
-    public function setItalic(bool $italic) : FontInterface;
-
-    /**
-     * Set whether the font should be displayed underlined.
-     * @param bool $underline
-     * @return FontInterface
-     */
-    public function setUnderline(bool $underline) : FontInterface;
-
-    /**
-     * Get the typeface name.
-     * @return string
-     */
-    public function getName() : string;
 
     /**
      * Get the font size.
@@ -52,20 +31,15 @@ interface FontInterface
     public function getSize() : int;
 
     /**
-     * Get whether the font is bolded.
-     * @return bool
+     * Set the font color.
+     * @param ColorInterface $color
+     * @return FontInterface
      */
-    public function isBold() : bool;
+    public function setColor(ColorInterface $color) : FontInterface;
 
     /**
-     * Get whether the font is italicized.
-     * @return bool
+     * Get the font color.
+     * @return ColorInterface
      */
-    public function isItalic() : bool;
-
-    /**
-     * Get whether the font is underlined.
-     * @return bool
-     */
-    public function isUnderlined() : bool;
+    public function getColor() : ColorInterface;
 }
