@@ -3,11 +3,12 @@
 namespace HelloFresh\Ausraster\Spreadsheet;
 
 use \Iterator;
+use \Countable;
 use HelloFresh\Ausraster\Spreadsheet\Coordinate;
 use HelloFresh\Ausraster\Spreadsheet\CellInterface;
 use HelloFresh\Ausraster\Exception\InvalidCellRangeException;
 
-class CoordinateRange implements Iterator
+final class CoordinateRange implements Iterator, Countable
 {
     /**
      * Start of range.
@@ -57,7 +58,7 @@ class CoordinateRange implements Iterator
      */
     public function key() : int
     {
-        return $counter;
+        return $this->counter;
     }
 
     /**
@@ -98,5 +99,17 @@ class CoordinateRange implements Iterator
     public function current() : Coordinate
     {
         return new Coordinate($this->pointerX, $this->pointerY);
+    }
+
+    /**
+     * Count the number of cells in the range
+     * @return int
+     */
+    public function count() : int
+    {
+        $rangeX = ord($this->to->x()) - ord($this->from->x());
+        $rangeY = $this->to->y() - $this->from->y();
+
+        return ++$rangeX * ++$rangeY;
     }
 }

@@ -62,7 +62,7 @@ class CoordinateTest extends \PHPUnit_Framework_TestCase
             [ 'A', 1 ],
             [ 'a', 1 ],
             [ 'C', 10 ],
-            [ 'JJ', 999 ]
+            // [ 'JJ', 999 ]
         ];
     }
 

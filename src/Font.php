@@ -2,7 +2,7 @@
 
 namespace HelloFresh\Ausraster;
 
-class Font implements FontInterface, FontEmphasisInterface
+final class Font implements FontInterface, FontEmphasisInterface
 {
     /**
      * Typeface name.
