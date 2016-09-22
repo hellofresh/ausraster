@@ -66,7 +66,7 @@ class Cell implements CellInterface
      */
     public function getContent() : string
     {
-        return $this->adapterCell->getValue();
+        return (string) $this->adapterCell->getValue();
     }
 
     /**
