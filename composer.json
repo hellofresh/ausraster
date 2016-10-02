@@ -36,6 +36,7 @@
         }
     },
     "suggest": {
-        "phpoffice/phpexcel": "Required to use the PHPExcel adapter"
+        "phpoffice/phpexcel": "Required to use the PHPExcel adapter",
+        "league/csv": "Required to use the CSV adapter"
     }
 }

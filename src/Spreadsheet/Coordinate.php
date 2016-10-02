@@ -64,6 +64,15 @@ final class Coordinate
     }
 
     /**
+     * Get the X offset, where A=1, B=2...
+     * @return int
+     */
+    public function xNumber() : int
+    {
+        return ord(strtolower($this->x)) - 96;
+    }
+
+    /**
      * Get the Y coordinate.
      * @return int
      */

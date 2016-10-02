@@ -20,7 +20,7 @@ class Document implements DocumentInterface
 
     /**
      * Collection of worksheets in the document.
-     * @var ArrayList
+     * @var WorksheetInterface[]
      */
     private $worksheets;
 
