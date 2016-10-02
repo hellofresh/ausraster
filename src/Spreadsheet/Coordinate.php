@@ -102,7 +102,7 @@ final class Coordinate
 
     private function validateX(string $x)
     {
-        if (! ctype_alpha($x) && strlen($x) !== 1) {
+        if (! ctype_alpha($x) || strlen($x) !== 1) {
             throw new InvalidCoordinateException();
         }
     }
