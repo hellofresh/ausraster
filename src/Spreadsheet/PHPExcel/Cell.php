@@ -7,8 +7,9 @@ use PHPExcel_Style_Fill;
 use HelloFresh\Ausraster\Spreadsheet\Coordinate;
 use HelloFresh\Ausraster\Spreadsheet\CellInterface;
 use HelloFresh\Ausraster\Spreadsheet\StyleInterface;
+use HelloFresh\Ausraster\Spreadsheet\StylableInterface;
 
-class Cell implements CellInterface
+class Cell implements CellInterface, StylableInterface
 {
     private $adapterCell;
 
@@ -33,7 +34,7 @@ class Cell implements CellInterface
     /**
      * {@inheritdoc}
      */
-    public function style(StyleInterface $style) : CellInterface
+    public function style(StyleInterface $style) : StylableInterface
     {
         $adapterStyle = $this->adapterCell->getStyle()->applyFromArray([
             'fill' => [
@@ -72,7 +73,7 @@ class Cell implements CellInterface
     /**
      * {@inheritdoc}
      */
-    public function resizeWidth(int $width = null) : CellInterface
+    public function resizeWidth(int $width = null) : StylableInterface
     {
         $column = $this->adapterCell->getWorksheet()->getColumnDimension($this->getCoordinate()->x());
 
@@ -88,7 +89,7 @@ class Cell implements CellInterface
     /**
      * {@inheritdoc}
      */
-    public function resizeHeight(int $height = null) : CellInterface
+    public function resizeHeight(int $height = null) : StylableInterface
     {
         $row = $this->adapterCell->getWorksheet()->getRowDimension($this->getCoordinate()->y());
 
