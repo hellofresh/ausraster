@@ -5,7 +5,7 @@ namespace HelloFresh\Ausraster\Spreadsheet\PHPExcel;
 use PHPExcel;
 use PHPExcel_IOFactory;
 use PHPExcel_Writer_Excel2007;
-use Collections\ArrayList;
+use Collections\Vector;
 use Collections\VectorInterface;
 use HelloFresh\Ausraster\Spreadsheet\DocumentInterface;
 use HelloFresh\Ausraster\Spreadsheet\WorksheetInterface;
@@ -20,7 +20,7 @@ class Document implements DocumentInterface
 
     /**
      * Collection of worksheets in the document.
-     * @var ArrayList
+     * @var Vector
      */
     private $worksheets;
 
@@ -31,7 +31,7 @@ class Document implements DocumentInterface
     {
         $this->documentAdapter = new PHPExcel();
         $this->documentAdapter->removeSheetByIndex();
-        $this->worksheets = new ArrayList();
+        $this->worksheets = new Vector();
     }
 
     /**
@@ -41,7 +41,7 @@ class Document implements DocumentInterface
     {
         $document = new static();
         $document->documentAdapter = PHPExcel_IOFactory::load($filepath);
-        $worksheets = new ArrayList($document->documentAdapter->getSheetNames());
+        $worksheets = new Vector($document->documentAdapter->getSheetNames());
 
         $document->worksheets = $worksheets->map(function (string $sheetName) use ($document) {
             return new Worksheet($document->documentAdapter->getSheetByName($sheetName));
